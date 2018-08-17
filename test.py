@@ -4,9 +4,9 @@ Created on 13.11.2017
 @author: tqian
 '''
 
-import scipy
-import numpy as np
-import matplotlib.pyplot as plt
+# import scipy
+# import numpy as np
+# import matplotlib.pyplot as plt
 
 #=========================================================================
 # #=========================================================================
@@ -56,4 +56,6 @@ import matplotlib.pyplot as plt
 # for i in range(3, 0, -1):
 #     print i
 
-print ("Hello world!")
+import sys
+
+print (sys.version)

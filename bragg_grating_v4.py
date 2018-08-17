@@ -26,7 +26,7 @@ L_grat_eff = L_grat / 2
 L_poly = (180 + 190 + 155) * 1e-6 + L_grat_eff
 # L_poly = (180 + 170 + 250) * 1e-6 + 4.34e-4
 L_wg = (180 + 190 + 155) * 1e-6
-L_ext = 3209.75853784e-6
+# L_ext = 3209.75853784e-6
 # L_ext = 6109.758538e-6
 # L_ext = 1550e-9 * 2 * 1e3
 # L_ext = 5060.19528784e-6
@@ -72,7 +72,7 @@ print ("passive cavity spacing = %s GHz" % (passive_cavity / 1e9))
 #=========================================================================
 
 FSR = c / (2 * (n_gain * L_gain + n_poly * (L_poly + L_ext)))
-print ("FSR = %s GHz" % (FSR / 1e9))
+print ("FSR = %s GHz" % float(FSR / 1e9))
 
 # 1st way
 # don't consider loss
