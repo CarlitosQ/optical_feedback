@@ -31,3 +31,4 @@ def FSR(L_gain, L_ext):
 
 FSR = FSR(300e-6,0)/1e9
 print ("FSR = %s GHz" % float('%.4g' % FSR))
+print ("FSR = %s GHz" % float('%.4d' % FSR))
