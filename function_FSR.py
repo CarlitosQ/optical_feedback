@@ -25,10 +25,10 @@ n_gain = 3.2
 n_air = 1.
 n_poly = 1.46
 
-def FSR(L_gain, L_ext):
-    FSR = c / (2 * (n_gain * L_gain + n_poly * (L_poly + L_ext)))
-    return FSR
+def FreeSpectralRange(L_gain, L_ext):
+    FreeSpectralRange = (c / (2 * (n_gain * L_gain*1e-6 + n_poly * (L_poly + L_ext*1e-6))))/1e9
+    return FreeSpectralRange
 
-FSR = FSR(300e-6,0)/1e9
+FSR = FreeSpectralRange(300, 0)
+FSR = FreeSpectralRange(500, 0)
 print ("FSR = %s GHz" % float('%.4g' % FSR))
-print ("FSR = %s GHz" % float('%.4d' % FSR))
