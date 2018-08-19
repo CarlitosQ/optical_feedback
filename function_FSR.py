@@ -8,16 +8,16 @@ from matplotlib.ticker import FormatStrFormatter
 
 c = 3e8
 WL = np.linspace(1548e-9, 1552e-9, 10000)
-# WL = np.linspace(1545e-9, 1555e-9, 1000000)
+
 WL_D = 1550e-9
 freq = c / WL
 freq_center = c / (WL_D)
-# L_gain = 500e-6
+
 L_grat = 699.4075 * 1e-6
 L_grat_eff = L_grat / 2
 L_poly = (180 + 190 + 155) * 1e-6 + L_grat_eff
 L_wg = (180 + 190 + 155) * 1e-6
-# L_ext = 0
+
 r1 = np.sqrt(0.9)
 r_1 = 0.99
 r_ext = 0.5
