@@ -52,25 +52,6 @@ print ("mode spacing for ADVA = %s GHz" % (spacing / 1e9))
 passive_cavity = c / (2 * n_poly * (L_poly + L_ext))
 print ("passive cavity spacing = %s GHz" % (passive_cavity / 1e9))
 
-#=========================================================================
-# delta_f_z = c / (n_poly * L_grat * np.sqrt(1 + (kappa_L / pi)**2))
-# print ("delta_f_z = %s GHz" % (delta_f_z / 1e9))
-#
-# delta_f_A = c / (2 * (n_gain * L_gain + n_poly * L_poly))
-# print ("delta_f_A = %s GHz" % (delta_f_A / 1e9))
-#
-# delta_f_P = c / (2 * (n_poly * (L_poly + L_ext)))
-# print ("delta_f_P = %s GHz" % (delta_f_P / 1e9))
-#
-# delta_f_T = c / (2 * (n_gain * L_gain + n_poly * (L_poly + L_ext)))
-# print ("delta_f_T = %s GHz" % (delta_f_T / 1e9))
-#
-# R_BGA = delta_f_z / delta_f_A
-# print ("R_BGA = %s" % (R_BGA))
-#
-# print ("delta_f_z / delta_f_P= %s" % (delta_f_z / delta_f_P))
-#=========================================================================
-
 FSR = c / (2 * (n_gain * L_gain + n_poly * (L_poly + L_ext)))
 print ("FSR = %s GHz" % float(FSR / 1e9))
 
