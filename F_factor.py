@@ -21,7 +21,7 @@ n_poly = 1.46
 n_air = 1.
 L_poly = (180 + 170 + 250 + 999.54 / 2) * 1e-6    # 170 phase section
 L_poly = (550 + 699.54 / 2) * 1e-6    # 170 phase section
-L_gain = 300e-6
+L_gain = 500e-6
 L_ext = np.linspace(0, 170e-3, 100000)
 # L_ext = (267 + 518.362787842 + 688) * 1e-6
 # L_ext = 3
@@ -51,8 +51,8 @@ print("R_ext/R_bragg= %s" % float('%.4g' % ratio))
 kappa_ext = float(r_ext / r_bragg * (1 - np.square(r_bragg)))
 print("kappa_ext= %s" % float('%.4g' % kappa_ext))
 
-# kappa = (1 - r_bragg) / tau_L * np.sqrt(r_ext / r_bragg)
-# print ("kappa= %s" % ('%.6e' % Decimal(str(kappa))))
+kappa = (1 - r_bragg) / tau_L * np.sqrt(r_ext / r_bragg)
+print("kappa= %s" % ('%.6e' % Decimal(str(kappa))))
 
 X = tau_ext / tau_L * kappa_ext
 # =========================================================================
@@ -165,7 +165,7 @@ F_factor = []
 # =========================================================================
 C_limit = 1
 # C_limit = 0.977 * 3 * np.pi / 2
-print("C_limit= %s" % C_limit)
+# print("C_limit= %s" % C_limit)
 
 for l_ext in L_ext:
     tau_EXT = 2 * n_poly * l_ext / c
