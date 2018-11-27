@@ -7,6 +7,7 @@ Created on Dec 15, 2017
 import scipy
 import numpy as np
 import matplotlib.pyplot as plt
+plt.style.use('classic')
 from decimal import Decimal
 import timeit
 
@@ -19,13 +20,18 @@ c = 3e8
 n_gain = 3.2
 n_poly = 1.46
 n_air = 1.
-L_poly = (180 + 170 + 250 + 999.54 / 2) * 1e-6    # 170 phase section
-L_poly = (550 + 699.54 / 2) * 1e-6    # 170 phase section
-L_gain = 500e-6
+# L_poly = (180 + 170 + 250 + 999.54 / 2) * 1e-6    # 170 phase section
+# L_poly = (550 + 699.54 / 2) * 1e-6    # 170 phase section
+L_grat = 699.84 * 1e-6
+L_grat_eff = L_grat / 2
+L_poly = (525 + L_grat_eff) * 1e-6    # 170 phase section
+L_gain = 300e-6
 L_ext = np.linspace(0, 170e-3, 100000)
+# L_ext = np.linspace(0, 5e-3, 100000)
+# L_ext = np.linspace(0, 0.001823066537842, 1000)
 # L_ext = (267 + 518.362787842 + 688) * 1e-6
 # L_ext = 3
-alpha = -2
+alpha = -3
 WL = np.linspace(1540e-9, 1570e-9, 10000)
 
 # =========================================================================
@@ -33,7 +39,7 @@ WL = np.linspace(1540e-9, 1570e-9, 10000)
 # =========================================================================
 # r_ext = 0.0078        # weak
 # r_ext = 0.8        # very strong
-r_ext = (n_poly - n_air) / (n_poly + n_air)   # 0.183673469388
+r_ext = (n_poly - n_air) / (n_poly + n_air)   # 0.18699186991869918
 # r_ext = 0.9
 R_ext = np.square(r_ext)
 print("R_ext = %s" % float('%.4g' % R_ext))
@@ -51,8 +57,8 @@ print("R_ext/R_bragg= %s" % float('%.4g' % ratio))
 kappa_ext = float(r_ext / r_bragg * (1 - np.square(r_bragg)))
 print("kappa_ext= %s" % float('%.4g' % kappa_ext))
 
-kappa = (1 - r_bragg) / tau_L * np.sqrt(r_ext / r_bragg)
-print("kappa= %s" % ('%.6e' % Decimal(str(kappa))))
+# kappa = (1 - r_bragg) / tau_L * np.sqrt(r_ext / r_bragg)
+# print ("kappa= %s" % ('%.6e' % Decimal(str(kappa))))
 
 X = tau_ext / tau_L * kappa_ext
 # =========================================================================
@@ -67,6 +73,7 @@ f_r = 9e9   # relaxation frequency 9 GHz
 # seperation of short and long cavity, in mm
 L_fr = c / (2 * n_poly * f_r) * 1000
 print("L_fr= %s mm" % L_fr)
+
 
 """ 1. Weak feedback condition """
 """ 1.1 r of pol and air interface """
@@ -176,7 +183,8 @@ for l_ext in L_ext:
         L_c = l_ext * 1000
 #         print ("L_c= %s mm" % L_c)
     if C > C_limit or kappa_ext > 0.1 or R_ext > 0.1:    # strong condition
-        yeta_couple = 0.5
+        # yeta_couple = 0.5     # calculation consider the 1x2 MMI for the design
+        yeta_couple = 1
         F_ext = R_ext * yeta_couple
 #         print ("strong condition F_ext=%s" % F_ext)
         A = tau_EXT / tau_L
@@ -197,14 +205,14 @@ plt.figure(1)
 if kappa_ext > 0.1 or R_ext > 0.1:
     plt.plot(L_ext * 1000, F_factor, 'r', label="$\kappa_{ext}$ %s, $R_{ext}$ %s" %
              (round(kappa_ext, 3), round(R_ext, 5)))
-    plt.title('Strong condition, $F^2$ factor, mirror / polymer interface')
+    # plt.title('Strong condition, $F^2$ factor, mirror / polymer interface')
 #     np.savetxt('F_factor_Strong_kappa%s.txt' % round(kappa_ext, 3), np.transpose(
 #         [(L_ext * 1000), F_factor]), fmt='%1.8e', delimiter='\t')
 elif kappa_ext < 0.01:
     plt.plot(L_ext * 1000, F_factor, 'b', label="$\kappa_{ext}$ %s, $R_{ext}$ %s" %
              (round(kappa_ext, 3), round(R_ext, 5)))
 #     plt.title('Weak condition, $F^2$ factor, polymer cladding / polymer interface')
-    plt.title('Weak condition, $F^2$ factor, mirror / polymer interface')
+    # plt.title('Weak condition, $F^2$ factor, mirror / polymer interface')
 #     np.savetxt('F_factor_Weak_kappa%s.txt' % round(kappa_ext, 3), np.transpose(
 #         [(L_ext * 1000), F_factor]), fmt='%1.8e', delimiter='\t')
 
@@ -214,8 +222,8 @@ plt.axvline(x=L_c, linestyle='dashed', color='r',
             label="$\L_{c}$=%s" % round(L_c, 3))
 # plt.title('$F^2$ factor, air / polymer interface')
 # plt.title('$F^2$ factor, mirror / polymer interface')
-plt.xlabel('external cavity length $L$ [mm]')
-plt.ylabel('reduction factor $F^2$')
+plt.xlabel('External Cavity Length $L$ [mm]', fontsize=15)
+plt.ylabel('Linewidth Reduction Factor $F^2$', fontsize=15)
 plt.legend(loc=0)
 
 stop = timeit.default_timer()

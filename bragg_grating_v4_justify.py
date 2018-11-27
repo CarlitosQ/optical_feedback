@@ -42,22 +42,22 @@ kappa = 20 * 100
 kappa_L = kappa * L_G
 
 delta_f_z = c / (n_gain * L_G * np.sqrt(1 + (kappa_L / pi)**2))
-print ("delta_f_z = %s GHz" % (delta_f_z / 1e9))
+print("delta_f_z = %s GHz" % (delta_f_z / 1e9))
 
 delta_f_A = c / (2 * (n_gain * L_A + n_gain * L_G))
-print ("delta_f_A = %s GHz" % (delta_f_A / 1e9))
+print("delta_f_A = %s GHz" % (delta_f_A / 1e9))
 
-#=========================================================================
+# =========================================================================
 # delta_f_P = c / (2 * (n_gain * (L_G + L_P)))
 # print ("delta_f_P = %s GHz" % (delta_f_P / 1e9))
 # print delta_f_z / delta_f_P
-#=========================================================================
+# =========================================================================
 
 delta_f_T = c / (2 * (n_gain * L_A + n_eff * (L_G)))
-print ("delta_f_T = %s GHz" % (delta_f_T / 1e9))
+print("delta_f_T = %s GHz" % (delta_f_T / 1e9))
 
 R_BGA = delta_f_z / delta_f_A
-print ("R_BGA = %s" % (R_BGA))
+print("R_BGA = %s" % (R_BGA))
 
 
 # kappa = 30 * 100
@@ -77,8 +77,8 @@ det_T = T11 * T22 - T21 * T12
 r = 1j * kappa * np.sinh(gama * L_G) / ((1j * delta_beta) *
                                         np.sinh(gama * L_G) + gama * np.cosh(gama * L_G))
 
-r = kappa * np.sinh(gama * L_G) / ((1j * delta_beta) *
-                                   np.sinh(gama * L_G) + gama * np.cosh(gama * L_G))
+# r = kappa * np.sinh(gama * L_G) / ((1j * delta_beta) *
+#                                    np.sinh(gama * L_G) + gama * np.cosh(gama * L_G))
 
 beta_1 = 2 * pi * n_poly / WL
 beta_2 = 2 * pi * n_poly / WL
@@ -86,7 +86,7 @@ W1 = np.exp(-2j * (beta_1 * L_G))
 W2 = np.exp(-2j * (beta_2 * L_P))    # without propagation loss
 # r_eff = (r * W1 + r_ext * W2) / (1 + r * W1 * r_ext * W2)
 
-#=========================================================================
+# =========================================================================
 # r_eff = (r + r_ext * W2) / (1 + r * r_ext * W2) * W1
 #
 # r_eff = ((np.cosh(gama * L_G) - 1j * delta_beta / gama * np.sinh(gama * L_G)) * r_ext * W1 * W2 + (-1j * kappa / gama * np.sinh(gama * L_G))
@@ -95,15 +95,15 @@ W2 = np.exp(-2j * (beta_2 * L_P))    # without propagation loss
 # T12 = -1j * kappa / gama * np.sinh(gama * L_G)
 # T21 = 1j * kappa / gama * np.sinh(gama * L_G)
 # r_eff = (T11 * r_ext * W1 * W2 + T12) / (T21 * r_ext * W1 * W2 + T22)
-#=========================================================================
+# =========================================================================
 
 r_eff = T21 / T11 + (det_T / T11**2 * r_ext * W2) / \
     (1 + T12 / T11 * r_ext * W2)    # tqian derived
 
-#=========================================================================
+# =========================================================================
 # r_eff = r + (det_T / (T11**2) * r_ext * W2) / \
 #     (1 + T12 / T11 * r_ext * W2)    # tqian derived
-#=========================================================================
+# =========================================================================
 
 gain = 27.368 * 100     # 27.368 cm^-1
 gain = 16 * 100
@@ -144,7 +144,7 @@ ax2.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
 plt.title("$r_{ext}$=%s, $L_{ext}$=%s mm" % (r_ext, L_P * 1000))
 fig.tight_layout()  # otherwise the right y-label is slightly clipped
 
-#=========================================================================
+# =========================================================================
 # # 2nd plot
 # fig, ax1 = plt.subplots()
 # color = 'blue'
@@ -167,7 +167,7 @@ fig.tight_layout()  # otherwise the right y-label is slightly clipped
 # # ax2.xaxis.set_major_formatter(FormatStrFormatter('%.3f'))
 # plt.title("$r_{ext}$=%s, $L_{ext}$=%s mm" % (r_ext, L_P * 1000))
 # fig.tight_layout()  # otherwise the right y-label is slightly clipped
-#=========================================================================
+# =========================================================================
 
 
 # 3rd plot
@@ -192,8 +192,8 @@ plt.title("$r_{ext}$=%s, $L_{ext}$=%s mm" % (r_ext, L_P * 1000))
 fig.tight_layout()  # otherwise the right y-label is slightly clipped
 
 
-path = "//hhi.de/benutzer/home/tqian/Master_thesis_tqian/calculations/r_bragg_RTG_verify/"
-np.savetxt(path + 'RTG_squared_%sum_gain_%s_%smm_verify.txt' % (L_A * 1e3, r_ext, L_P * 1e3), np.transpose(
-    [((freq - freq_center) / 1e9), G_abs**2, G_phi]), fmt='%1.8e', delimiter='\t')
+# path = "//hhi.de/benutzer/home/tqian/Master_thesis_tqian/calculations/r_bragg_RTG_verify/"
+# np.savetxt(path + 'RTG_squared_%sum_gain_%s_%smm_verify.txt' % (L_A * 1e3, r_ext, L_P * 1e3), np.transpose(
+#     [((freq - freq_center) / 1e9), G_abs**2, G_phi]), fmt='%1.8e', delimiter='\t')
 
 plt.show()
