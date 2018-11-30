@@ -8,8 +8,11 @@ import scipy
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('classic')
+plt.rcParams.update(
+    {'font.family': 'Arial', 'font.size': 15, 'axes.linewidth': 2, 'xtick.major.width': 2, 'ytick.major.width': 2})
 from decimal import Decimal
 import timeit
+
 
 start = timeit.default_timer()
 
@@ -222,9 +225,10 @@ plt.axvline(x=L_c, linestyle='dashed', color='r',
             label="$\L_{c}$=%s" % round(L_c, 3))
 # plt.title('$F^2$ factor, air / polymer interface')
 # plt.title('$F^2$ factor, mirror / polymer interface')
-plt.xlabel('External Cavity Length $L$ [mm]', fontsize=15)
-plt.ylabel('Linewidth Reduction Factor $F^2$', fontsize=15)
-plt.legend(loc=0)
+plt.tick_params(axis='both', which='both', top=False, right=False)
+plt.xlabel('External Cavity Length $L$ [mm]', fontsize=20)
+plt.ylabel('Linewidth Reduction Factor $F^2$', fontsize=20)
+plt.legend(loc=0, fontsize=15)
 
 stop = timeit.default_timer()
 print('Time: ', stop - start)
