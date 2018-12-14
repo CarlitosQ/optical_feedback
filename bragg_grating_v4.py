@@ -25,11 +25,11 @@ freq_center = c / (WL_D)
 L_gain = 300e-6
 # L_grat = 699.4075 * 1e-6
 L_grat = 699.84 * 1e-6
-L_grat = 700.644*1e-6
+# L_grat = 700.644*1e-6
 L_grat_eff = L_grat / 2
 # 170 phase section L = 700e-6
 L_poly = (180 + 190 + 155) * 1e-6 + L_grat_eff
-L_poly = 509 * 1e-6 + L_grat_eff
+# L_poly = 509 * 1e-6 + L_grat_eff
 # L_poly = (180 + 170 + 250) * 1e-6 + 4.34e-4
 L_wg = 509 * 1e-6
 # L_ext = 3209.75853784e-6
@@ -37,7 +37,7 @@ L_wg = 509 * 1e-6
 # L_ext = 1550e-9 * 2 * 1e3
 # L_ext = 5060.19528784e-6
 L_ext = (267 + 518.362787842 + 688) * 1e-6
-L_ext = 6359.758538 * 1e-6
+# L_ext = 6359.758538 * 1e-6
 # 6359.758538
 # 5309.758538
 # 4869.758538
@@ -57,6 +57,9 @@ r_ext = (n_poly - n_air) / (n_poly + n_air)   # 0.18699186991869918
 
 kappa_L = 0.68641
 kappa = kappa_L / L_grat
+
+# L_grating_eff = np.tanh(kappa_L)/(2*kappa)
+# print(L_grating_eff)
 
 spacing = c / (2 * (n_gain * L_gain + n_poly * L_poly))
 print("mode spacing for ADVA = %s GHz" % (spacing / 1e9))
@@ -86,8 +89,8 @@ r = 1j * kappa * np.sinh(gama * L_grat) / ((1j * delta_beta) *
                                            np.sinh(gama * L_grat) + gama * np.cosh(gama * L_grat))
 
 
-r = kappa * np.sinh(gama * L_grat) / ((1j * delta_beta) *
-                                      np.sinh(gama * L_grat) + gama * np.cosh(gama * L_grat))
+# r = kappa * np.sinh(gama * L_grat) / ((1j * delta_beta) *
+#                                       np.sinh(gama * L_grat) + gama * np.cosh(gama * L_grat))
 
 
 # W1 = np.exp(-1j * (2 * pi * n_poly * L_wg / WL)) * np.exp(-8000 * L_wg)
@@ -157,26 +160,26 @@ G_phi = np.angle(G) / (pi)
 # print(L_eff)
 
 # 1st plot
-fig, ax1 = plt.subplots()
-color = 'blue'
-ax1.set_xlabel('Frequency (GHz)')
-ax1.set_ylabel('Reflectivity $R_{bragg}$', color=color)
-ax1.plot(((freq - freq_center) / 1e9), r_bragg **
-         2, label="$R_{bragg}$", color=color)
-ax1.tick_params(axis='y', labelcolor=color)
-ax1.grid()
-# ax1.legend(loc=0)
-ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-color = 'green'
-# we already handled the x-label with ax1
-ax2.set_ylabel('Phase/$\pi$', color=color)
-ax2.plot(((freq - freq_center) / 1e9), (r_phi),
-         label="$\phi_{bragg}$", color=color)
-ax2.tick_params(axis='y', labelcolor=color)
-# ax2.legend(loc=0)
-ax2.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
-# plt.title("$r_{ext}$=%s, $L_{ext}$=%s mm" % (r_ext, L_ext * 1000))
-fig.tight_layout()  # otherwise the right y-label is slightly clipped
+# fig, ax1 = plt.subplots()
+# color = 'blue'
+# ax1.set_xlabel('Frequency (GHz)')
+# ax1.set_ylabel('Reflectivity $R_{bragg}$', color=color)
+# ax1.plot(((freq - freq_center) / 1e9), r_bragg **
+#          2, label="$R_{bragg}$", color=color)
+# ax1.tick_params(axis='y', labelcolor=color)
+# ax1.grid()
+# # ax1.legend(loc=0)
+# ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
+# color = 'green'
+# # we already handled the x-label with ax1
+# ax2.set_ylabel('Phase/$\pi$', color=color)
+# ax2.plot(((freq - freq_center) / 1e9), (r_phi),
+#          label="$\phi_{bragg}$", color=color)
+# ax2.tick_params(axis='y', labelcolor=color)
+# # ax2.legend(loc=0)
+# ax2.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
+# # plt.title("$r_{ext}$=%s, $L_{ext}$=%s mm" % (r_ext, L_ext * 1000))
+# fig.tight_layout()  # otherwise the right y-label is slightly clipped
 
 # 2nd plot
 freq_axis = ((freq - freq_center) / 1e9)
@@ -193,7 +196,7 @@ color = 'green'
 # we already handled the x-label with ax1
 ax2.set_ylabel('Phase/$\pi$', color=color)
 ax2.plot(((freq - freq_center) / 1e9), (G_phi), label="$\phi$", color=color)
-ax1.set_xlim(-150, 150)
+ax1.set_xlim(-300, 300)
 ax2.tick_params(axis='y', labelcolor=color)
 ax2.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
 # ax2.grid()

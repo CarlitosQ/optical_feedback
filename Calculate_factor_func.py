@@ -112,18 +112,30 @@ def FSR(L_grat, L_wg_before_grat, L_ext, r_ext):
     return FSR
 
 
+# Set 1
+# n_poly = 1.46
+# n_air = 1.
+# r_ext = (n_poly - n_air) / (n_poly + n_air)   # 0.18699186991869918
+# # L_grat = 699.84 * 1e-6
+# L_grat = 700.644*1e-6
+# L_grat_eff = L_grat / 2
+# # L_wg_before_grat = 525e-6
+# L_wg_before_grat = 509e-6
+# # L_ext = (267 + 518.362787842 + 688) * 1e-6 + L_grat_eff
+# L_ext = 6359.758538 * 1e-6
+# # print(F_factor(L_grat, L_wg_before_grat, L_ext, r_ext))
+# # print(C_factor(L_grat, L_wg_before_grat, L_ext, r_ext))
+
+# Set 2
 n_poly = 1.46
 n_air = 1.
 r_ext = (n_poly - n_air) / (n_poly + n_air)   # 0.18699186991869918
-# L_grat = 699.84 * 1e-6
-L_grat = 700.644*1e-6
+L_grat = 699.84 * 1e-6
 L_grat_eff = L_grat / 2
-# L_wg_before_grat = 525e-6
-L_wg_before_grat = 509e-6
-# L_ext = (267 + 518.362787842 + 688) * 1e-6 + L_grat_eff
-L_ext = 6359.758538 * 1e-6
+L_wg_before_grat = 525e-6
+L_ext = (267 + 518.362787842 + 688) * 1e-6
 # print(F_factor(L_grat, L_wg_before_grat, L_ext, r_ext))
-# print(C_factor(L_grat, L_wg_before_grat, L_ext, r_ext))
+print(C_factor(L_grat, L_wg_before_grat, L_ext, r_ext))
 
 print("mode spacing for ADVA = %s GHz" %
       (normal_cavity(L_grat, L_wg_before_grat) / 1e9))

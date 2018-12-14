@@ -29,7 +29,7 @@ L_grat = 699.84 * 1e-6
 L_grat_eff = L_grat / 2
 L_poly = (525 + L_grat_eff) * 1e-6    # 170 phase section
 L_gain = 300e-6
-L_ext = np.linspace(0, 170e-3, 100000)
+L_ext = np.linspace(0, 180e-3, 100000)
 # L_ext = np.linspace(0, 5e-3, 100000)
 # L_ext = np.linspace(0, 0.001823066537842, 1000)
 # L_ext = (267 + 518.362787842 + 688) * 1e-6
@@ -41,8 +41,8 @@ WL = np.linspace(1540e-9, 1570e-9, 10000)
 # Define r_ext
 # =========================================================================
 # r_ext = 0.0078        # weak
-# r_ext = 0.8        # very strong
-r_ext = (n_poly - n_air) / (n_poly + n_air)   # 0.18699186991869918
+r_ext = 0.8        # very strong
+# r_ext = (n_poly - n_air) / (n_poly + n_air)   # 0.18699186991869918
 # r_ext = 0.9
 R_ext = np.square(r_ext)
 print("R_ext = %s" % float('%.4g' % R_ext))
@@ -206,23 +206,23 @@ for l_ext in L_ext:
 # print len(F_factor)
 plt.figure(1)
 if kappa_ext > 0.1 or R_ext > 0.1:
-    plt.plot(L_ext * 1000, F_factor, 'r', label="$\kappa_{ext}$ %s, $R_{ext}$ %s" %
+    plt.plot(L_ext * 1000, F_factor, 'r', label="$\kappa_{ext}$=%s, $R_{ext}$=%s" %
              (round(kappa_ext, 3), round(R_ext, 5)))
     # plt.title('Strong condition, $F^2$ factor, mirror / polymer interface')
 #     np.savetxt('F_factor_Strong_kappa%s.txt' % round(kappa_ext, 3), np.transpose(
 #         [(L_ext * 1000), F_factor]), fmt='%1.8e', delimiter='\t')
 elif kappa_ext < 0.01:
-    plt.plot(L_ext * 1000, F_factor, 'b', label="$\kappa_{ext}$ %s, $R_{ext}$ %s" %
+    plt.plot(L_ext * 1000, F_factor, 'b', label="$\kappa_{ext}$=%s, $R_{ext}$=%s" %
              (round(kappa_ext, 3), round(R_ext, 5)))
 #     plt.title('Weak condition, $F^2$ factor, polymer cladding / polymer interface')
     # plt.title('Weak condition, $F^2$ factor, mirror / polymer interface')
 #     np.savetxt('F_factor_Weak_kappa%s.txt' % round(kappa_ext, 3), np.transpose(
 #         [(L_ext * 1000), F_factor]), fmt='%1.8e', delimiter='\t')
 
-plt.axvline(x=L_fr, linestyle='dashed', color='b',
-            label="$\L_{f_r}$=%s" % round(L_fr, 3))
+# plt.axvline(x=L_fr, linestyle='dashed', color='b',
+#             label="$\L_{f_r}$=%s" % round(L_fr, 3))
 plt.axvline(x=L_c, linestyle='dashed', color='r',
-            label="$\L_{c}$=%s" % round(L_c, 3))
+            label="$\L_{c}$=%s mm" % round(L_c, 3))
 # plt.title('$F^2$ factor, air / polymer interface')
 # plt.title('$F^2$ factor, mirror / polymer interface')
 plt.tick_params(axis='both', which='both', top=False, right=False)
