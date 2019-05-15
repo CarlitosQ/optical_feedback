@@ -24,19 +24,23 @@ freq = c / WL
 freq_center = c / (WL_D)
 L_gain = 300e-6
 # L_grat = 699.4075 * 1e-6
-L_grat = 699.84 * 1e-6
+# L_grat = 699.84 * 1e-6
 # L_grat = 700.644*1e-6
+L_grat = 299.7*1e-6
 L_grat_eff = L_grat / 2
+
 # 170 phase section L = 700e-6
 L_poly = (180 + 190 + 155) * 1e-6 + L_grat_eff
 # L_poly = 509 * 1e-6 + L_grat_eff
 # L_poly = (180 + 170 + 250) * 1e-6 + 4.34e-4
 L_wg = 509 * 1e-6
+
 # L_ext = 3209.75853784e-6
 # L_ext = 6109.758538e-6
 # L_ext = 1550e-9 * 2 * 1e3
 # L_ext = 5060.19528784e-6
-L_ext = (267 + 518.362787842 + 688) * 1e-6
+# L_ext = (266.45 + 518.362787842 + 688) * 1e-6  # Lgrating 700
+L_ext = (264.49 + 402.17807 + 518.362787842 + 688)*1e-6  # Lgrating 300
 # L_ext = 6359.758538 * 1e-6
 # 6359.758538
 # 5309.758538
